@@ -172,7 +172,7 @@ public class CmsAdminGlobalAct extends CmsAdminAbstract {
 		List<CmsGroup> groupList = cmsGroupMng.getList();
 		List<CmsSite> siteList = cmsSiteMng.getList();
 		List<CmsRole> roleList = cmsRoleMng.getList();
-
+		Integer hitrole=roleList.get(0).getId();
 		model.addAttribute("cmsAdmin", admin);
 		model.addAttribute("site", site);
 		model.addAttribute("sites", admin.getSites());
@@ -181,6 +181,7 @@ public class CmsAdminGlobalAct extends CmsAdminAbstract {
 		model.addAttribute("siteList", siteList);
 		model.addAttribute("roleList", roleList);
 		model.addAttribute("currRank", currUser.getRank());
+		model.addAttribute("hitrole", hitrole);
 
 		appendQueryParam(model, queryUsername, queryEmail, queryGroupId, 
 				queryDisabled, queryRealName, queryDepartId, queryRoleId);

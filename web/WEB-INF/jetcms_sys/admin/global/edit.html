@@ -127,7 +127,10 @@ function allControlChannelSelect(siteId){
 	<div class="clear"></div>
 </div>
 <div class="body-box">
+
+	<input type="text" value="${hitrole}"/>
 <@p.form id="jvForm" action="o_update.do" labelWidth="12" class="formDefStyle">
+
 <@p.td width="50" colspan="1" label="cmsUser.username">${cmsAdmin.username}</@p.td>
 <@p.text width="50" colspan="1" label="cmsUser.email" name="email" value=cmsAdmin.email rvalue=cmsAdmin.email size="30" maxlength="100" class="email"/><@p.tr/>
 <@p.password width="50" colspan="1" label="cmsUser.password" id="password" name="password" maxlength="100" help="cmsUser.password.help"/>

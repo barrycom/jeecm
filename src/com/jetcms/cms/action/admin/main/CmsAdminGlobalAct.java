@@ -2,18 +2,20 @@ package com.jetcms.cms.action.admin.main;
 
 import static com.jetcms.common.page.SimplePage.cpn;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jetcms.cms.entity.main.UserHighRole;
+import com.jetcms.cms.manager.main.ContentTypeMng;
+import com.jetcms.cms.manager.main.UserHighRoleMng;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -181,7 +183,14 @@ public class CmsAdminGlobalAct extends CmsAdminAbstract {
 		model.addAttribute("siteList", siteList);
 		model.addAttribute("roleList", roleList);
 		model.addAttribute("currRank", currUser.getRank());
-		model.addAttribute("hitrole", hitrole);
+		Set<CmsRole> cmsRoleList=admin.getRoles();
+	/*	Iterator<CmsRole> it = cmsRoleList.iterator();
+		Integer bd=0;
+		while(it.hasNext()){
+	             bd=  ((CmsRole)it.next()).getPriority();
+	            break;
+		}*/
+		model.addAttribute("hitrole", admin.getRoleIds()[0]);
 
 		appendQueryParam(model, queryUsername, queryEmail, queryGroupId, 
 				queryDisabled, queryRealName, queryDepartId, queryRoleId);
@@ -219,9 +228,33 @@ public class CmsAdminGlobalAct extends CmsAdminAbstract {
 			String queryUsername, String queryEmail, Integer queryGroupId,
 			Boolean queryDisabled, String queryRealName,Integer queryDepartId
 			,Integer queryRoleId,
-			Integer pageNo, HttpServletRequest request,
+			Integer pageNo, HttpServletRequest request,Integer hitrole,
 			ModelMap model) {
-		System.out.println("------------------------");
+		    System.out.println(hitrole+"------------------------");
+		    System.out.println(	roleIds[0]+"------------------------");
+    	    CmsRole s=	cmsRoleMng.findById(roleIds[0]);
+	       // Integer ps=s.getPriority();
+
+		UserHighRole userHighRoleTmp=userHighRoleMng.findById(bean.getId());
+		if(userHighRoleTmp!=null)
+		{
+			if(userHighRoleTmp.getHighRole()>roleIds[0])
+			{
+				userHighRoleTmp.setHighRole(roleIds[0]);
+				userHighRoleMng.update(userHighRoleTmp);
+			}
+
+		}
+		else {
+			if(hitrole<roleIds[0]) {
+				UserHighRole userHighRole = new UserHighRole();
+
+				userHighRole.setId(bean.getId());
+				userHighRole.setHighRole(roleIds[0]);
+
+				userHighRoleMng.save(userHighRole);
+			}
+		}
 		 WebErrors errors = validateUpdate(bean.getId(),bean.getRank(), request);
 		if (errors.hasErrors()) {
 			return errors.showErrorPage(model);
@@ -427,5 +460,7 @@ public class CmsAdminGlobalAct extends CmsAdminAbstract {
 		}
 		return false;
 	}
+	@Autowired
+	protected UserHighRoleMng userHighRoleMng;
 
 }

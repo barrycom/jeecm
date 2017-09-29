@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.mail.MessagingException;
 
+import com.jetcms.core.entity.*;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,13 +24,6 @@ import com.jetcms.common.email.MessageTemplate;
 import com.jetcms.common.hibernate4.Updater;
 import com.jetcms.common.page.Pagination;
 import com.jetcms.core.dao.CmsUserDao;
-import com.jetcms.core.entity.CmsDepartment;
-import com.jetcms.core.entity.CmsGroup;
-import com.jetcms.core.entity.CmsSite;
-import com.jetcms.core.entity.CmsUser;
-import com.jetcms.core.entity.CmsUserExt;
-import com.jetcms.core.entity.CmsWorkflowEvent;
-import com.jetcms.core.entity.UnifiedUser;
 import com.jetcms.core.manager.CmsDepartmentMng;
 import com.jetcms.core.manager.CmsGroupMng;
 import com.jetcms.core.manager.CmsRoleMng;

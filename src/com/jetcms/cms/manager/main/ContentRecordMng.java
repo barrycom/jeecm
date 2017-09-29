@@ -12,7 +12,7 @@ import com.jetcms.cms.entity.main.ContentRecord.ContentOperateType;
 public interface ContentRecordMng {
 	public Pagination getPage(int pageNo, int pageSize);
 	
-	public List<ContentRecord>getListByContentId(Integer contentId);
+	public List<ContentRecord> getListByContentId(Integer contentId);
 	
 	public ContentRecord record(Content content, CmsUser user, ContentOperateType operate);
 

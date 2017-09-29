@@ -139,6 +139,9 @@
 	
 	<bean id="accountDrawMng" class="com.jetcms.cms.manager.assist.impl.CmsAccountDrawMngImpl"/>
 	<bean id="accountPayMng" class="com.jetcms.cms.manager.assist.impl.CmsAccountPayMngImpl"/>
+
+	<bean id="userHighRoleMng" class="com.jetcms.cms.manager.main.impl.UserHighRoleMngImpl"/>
+
 	
 	<!--DAO-->
 	<bean id="channelDao" class="com.jetcms.cms.dao.main.impl.ChannelDaoImpl"/>
@@ -148,6 +151,7 @@
 	<bean id="contentDao" class="com.jetcms.cms.dao.main.impl.ContentDaoImpl"/>
 	<bean id="contentTagDao" class="com.jetcms.cms.dao.main.impl.ContentTagDaoImpl"/>
 	<bean id="contentTypeDao" class="com.jetcms.cms.dao.main.impl.ContentTypeDaoImpl"/>
+	<bean id="userHighRoleDao" class="com.jetcms.cms.dao.main.impl.UserHighRoleDaoImpl"/>
 	<bean id="contentExtDao" class="com.jetcms.cms.dao.main.impl.ContentExtDaoImpl"/>
 	<bean id="contentTxtDao" class="com.jetcms.cms.dao.main.impl.ContentTxtDaoImpl"/>
 	<bean id="contentCountDao" class="com.jetcms.cms.dao.main.impl.ContentCountDaoImpl"/>

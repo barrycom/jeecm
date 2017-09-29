@@ -47,6 +47,8 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jetcms.cms.entity.main.UserHighRole;
+import com.jetcms.cms.manager.main.UserHighRoleMng;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
@@ -136,6 +138,7 @@ public class UserOrderAct {
 	public String orderList2(String startTime,String endTime,Integer pageNo,HttpServletRequest request,
 			HttpServletResponse response, ModelMap model) {
 		CmsUser currUser = CmsUtils.getUser(request);
+		List<UserHighRole> userHighRoleList=null;
 		//当前级别
 		String roleName="线下省运";
 		String url="../global_sy/v_list.do";
@@ -152,6 +155,7 @@ public class UserOrderAct {
 		for (CmsRole cmsRole : roles) {
 			roleId = cmsRole.getId();
 		}
+		Pagination pagination=null;
 		Pagination paginationDL = null;
 		Pagination paginationYG = manager.getPageHY(null, null,
 				null, null, null, true, currUser.getRank(),
@@ -178,6 +182,8 @@ public class UserOrderAct {
 					null,null,4,
 					null,null,
 					cpn(pageNo), CookieUtils.getPageSize(request),currUser.getId());
+
+
 		}else if(roleId==4){
 			roleName="线下代理";
 			url="../global_xxdl/v_list.do?userId="+currUser.getId();
@@ -199,11 +205,19 @@ public class UserOrderAct {
 				null,null,3,
 				null,null,
 				cpn(pageNo), CookieUtils.getPageSize(request));
-		
+			 userHighRoleList=userHighRoleMng.getListByHighRole(3);
+		/*	 pagination=contentBuyMng.getPageOrder(startTime,endTime,369,
+					cpn(pageNo), CookieUtils.getPageSize(request));*/
+
 		}
+
+
 		if(paginationDL!=null){
 			if(paginationDL.getList()!=null){
 				countDL = paginationDL.getList().size();
+				if(userHighRoleList!=null) {
+					countDL = countDL +userHighRoleList.size();
+				}
 			}
 		}
 		model.addAttribute("countDL", countDL);
@@ -1077,6 +1091,9 @@ public class UserOrderAct {
 	private ContentBuyMng contentBuyMng;
 	@Autowired
 	protected CmsUserMng manager;
+
+	@Autowired
+	protected UserHighRoleMng userHighRoleMng;
 		//excel组装
 	 /* 
      * 列头单元格样式

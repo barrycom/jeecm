@@ -5,8 +5,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jetcms.cms.manager.main.UserHighRoleMng;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.ModelMap;
 
 import com.jetcms.cms.entity.main.Channel;
@@ -109,5 +111,6 @@ public class CmsAdminAbstract {
 	protected CmsWebserviceMng cmsWebserviceMng;
 	@Autowired
 	protected CmsAuthorizingRealm authorizingRealm;
+
  
 }

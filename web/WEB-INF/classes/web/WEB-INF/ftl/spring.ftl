@@ -203,7 +203,7 @@
             <#list options?keys as value>
             <option value="${value?html}"<@checkSelected value/>>${options[value]?html}</option>
             </#list>
-        <#else> 
+        <#else>
             <#list options as value>
             <option value="${value?html}"<@checkSelected value/>>${value?html}</option>
             </#list>
